@@ -1,0 +1,17 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+.fi-main {
+    max-width: 40rem;
+    margin: 0 !important;
+}
+
+.fi-sidebar {
+    display: none;
+}
+
+.fi-body {
+    background: rgba(18, 18, 18) !important;
+}
