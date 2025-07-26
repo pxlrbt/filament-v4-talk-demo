@@ -32,8 +32,7 @@ class RichEditor extends FormPage
                     ->mergeTags([
                         'name',
                         'today'
-                    ])
-                ,
+                    ]),
 
                 new HtmlString(<<<HTML
                     <style>
