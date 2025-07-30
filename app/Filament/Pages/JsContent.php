@@ -16,7 +16,7 @@ class JsContent extends FormPage
                 Forms\Components\TextInput::make('name')
                   ->maxLength(20)
                   ->hint(\Filament\Schemas\JsContent::make(<<<'JS'
-                      ($get('name')?.length ?? 0) + '/20'
+                      ($state.length ?? 0) + '/20'
                   JS)),
         ]);
     }

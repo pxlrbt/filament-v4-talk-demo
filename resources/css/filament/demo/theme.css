@@ -15,3 +15,11 @@
 .fi-body {
     background: rgba(18, 18, 18) !important;
 }
+
+.fi-breadcrumbs {
+    display: block !important;
+}
+
+.fi-header-actions-ctn {
+    display: none;
+}

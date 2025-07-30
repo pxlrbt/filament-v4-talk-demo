@@ -78,18 +78,18 @@ class PageSchema extends Page implements HasTable
                         view('laravel')
                     ]),
 
-                    Tabs\Tab::make('Form')->components([
-                        Form::make()->schema([
-                            Forms\Components\TextInput::make('name')
-                        ])
+                    Tabs\Tab::make('LW')->components([
+                        Livewire::make(DemoComponent::class),
                     ]),
 
                     Tabs\Tab::make('Table')->components([
                         EmbeddedTable::make()
                     ]),
 
-                    Tabs\Tab::make('LW')->components([
-                        Livewire::make(DemoComponent::class),
+                    Tabs\Tab::make('Form')->components([
+                        Form::make()->schema([
+                            Forms\Components\TextInput::make('name')
+                        ])
                     ]),
             ]),
         ]);

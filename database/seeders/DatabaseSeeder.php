@@ -2,10 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attendee;
+use App\Models\Location;
+use App\Models\Meetup;
 use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,8 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
             'name' => 'Dennis',
             'email' => 'hey@denniskoch.dev',
@@ -83,5 +85,83 @@ class DatabaseSeeder extends Seeder
 
 
         Post::create(['title' => 'Test', 'author_id' => 1]);
+
+        // Nested Resource demo
+
+        $locations = [];
+        $attendees = [];
+        $meetups = [];
+
+        $locations[] = Location::create([
+            'name' => 'Novu Campus',
+            'city' => 'Zurich',
+        ]);
+
+        $locations[] = Location::create([
+            'name' => 'Liip Arena',
+            'city' => 'Zurich',
+        ]);
+
+        $locations[] = Location::create([
+            'name' => 'Infomaniak',
+            'city' => 'Geneve',
+        ]);
+
+        $locations[] = Location::create([
+            'name' => 'Byro',
+            'city' => 'Aarau',
+        ]);
+
+        $locations[] = Location::create([
+            'name' => 'Neustadt Agentur',
+            'city' => 'Luzern',
+        ]);
+
+        for ($i = 0; $i < 12; $i++) {
+            $date = today()
+                ->setDay(28)
+                ->setMonth($i + 1);
+
+            $meetups[] = Meetup::create([
+                'location_id' => $locations[random_int(0, count($locations) - 1)]->id,
+                'name' => $date->format('M').' 25',
+                'start' => $date,
+            ]);
+        }
+
+        $attendees[] = Attendee::create([
+            'name' => 'Dennis',
+            'email' => 'hey@denniskoch.dev'
+        ]);
+
+        $attendees[] = Attendee::create([
+            'name' => 'Stefan',
+            'email' => 'stefan@laravel.swiss'
+        ]);
+
+        $attendees[] = Attendee::create([
+            'name' => 'Philipp',
+            'email' => 'philipp@laravel.swiss'
+        ]);
+
+        $attendees[] = Attendee::create([
+            'name' => 'Sandro',
+            'email' => 'sandro@laravel.swiss'
+        ]);
+
+        $attendees[] = Attendee::create([
+            'name' => 'Sascha',
+            'email' => 'sascha@laravel.swiss'
+        ]);
+
+        foreach ($meetups as $meetup) {
+            foreach ($attendees as $attendee) {
+                DB::table('attendee_meetup')
+                    ->insert([
+                        'meetup_id' => $meetup->id,
+                        'attendee_id' => $attendee->id,
+                    ]);
+            }
+        }
     }
 }
